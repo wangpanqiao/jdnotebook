@@ -28,7 +28,7 @@ class JdSpider(scrapy.Spider):
         f = lambda i: {i.split("：")[0]: i.split("：")[1]}
         for i in map(f, parameter):
             item.update(i)
-        url = "http://p.3.cn/prices/get?skuid=J_"
+        url = "http://p.3.cn/prices/get?skuid=J_"+item["shop_id"]
         yield scrapy.Request(url,callback=self.get_price, meta={"item": item})
 
     def get_price(self, response):
